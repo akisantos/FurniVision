@@ -197,6 +197,10 @@ a {
 .section-title {
   color: #2f2f2f; }
 
+.title{
+  font-size: 2rem;
+}
+
 .product-section {
   padding: 7rem 0; }
   .product-section .product-item {

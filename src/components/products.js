@@ -2,7 +2,7 @@ export const Products = [
     {
       "id": 1,
       "sku": "F-001",
-      "name": "Modern_Sofa",
+      "name": "Modern Sofa",
       "price": 1299.99,
       "short_description": "Sleek and comfortable sofa with clean lines.",
       "materials": "Velvet, Foam, Wood",
@@ -15,29 +15,21 @@ export const Products = [
     {
       "id": 2,
       "sku": "F-002",
-      "name": "Rustic_Dining_Table",
+      "name": "Rustic Dining Table",
       "price": 899.99,
       "short_description": "Sturdy dining table with a natural wood finish.",
       "materials": "Oak Wood",
       "color": "Brown",
-      "images": ["https://images.pexels.com/photos/5780838/pexels-photo-5780838.jpeg", "https://example.com/images/product2_2.jpg"],
+      "images": ["https://images.pexels.com/photos/5780838/pexels-photo-5780838.jpeg", 
+        "https://example.com/images/product2_2.jpg",
+        "https://images.pexels.com/photos/5780838/pexels-photo-5780838.jpeg"],
       "uom": "Piece",
       "thumbnail":"https://images.pexels.com/photos/5780838/pexels-photo-5780838.jpeg",
       "isFeatured": true,
       "brand": "IKEA",
       "is_in_stock": true,
       "rating": 4.5,
-      "model": "./models/Rustic_Dining_Table/Rustic_Dining_Table.obj",
-      "textures": [
-        "./models/Rustic_Dining_Table/Fabric030_2K_Color.jpg",
-        "./models/Rustic_Dining_Table/Fabric030_2K_Displacement.jpg",
-        "./models/Rustic_Dining_Table/Fabric030_2K_Normal.jpg",
-        "./models/Rustic_Dining_Table/Fabric030_2K_Roughness.jpg",
-        "./models/Rustic_Dining_Table/Wood026_2K_Color.jpg",
-        "./models/Rustic_Dining_Table/Wood026_2K_Displacement.jpg",
-        "./models/Rustic_Dining_Table/Wood026_2K_Normal.jpg",
-        "./models/Rustic_Dining_Table/Wood026_2K_Roughness.jpg",
-      ]
+      "model": "/models/Rustic_Dining_Table/scene.glb"
     },
     {
       "id": 3,

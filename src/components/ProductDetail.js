@@ -6,6 +6,7 @@ import { useLoader } from '@react-three/fiber'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader'
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import { TextureLoader } from 'three/src/loaders/TextureLoader'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import Loader from "./ModelLoader";
 
 
@@ -30,16 +31,14 @@ export default function ProductDetail({product}){
 }
 
 function ProductPreview({linkToModel}){
-    const productModel = useLoader(OBJLoader, linkToModel)
-    productModel.scale.set(0.03,0.03,0.03);
     return(
-        <div style={{height: "100%", width: "100%"}}>
+        <div style={{height: "1000px", width: "100%", borderRadius: "100px", maxHeight:"50vh"}}>
             <Canvas>
-                <PerspectiveCamera makeDefault position={[20,10,20]}  />
+                <PerspectiveCamera makeDefault position={[0,15,25]} />
                 <Suspense fallback={<Loader/>}>
-                <primitive object={productModel} />
+                <Model linkToModel={linkToModel} />
                 <OrbitControls autoRotate />
-                <Environment preset="apartment" ground/>
+                <Environment preset="apartment" background ground/>
                 </Suspense>
             </Canvas>
         </div>
@@ -48,42 +47,66 @@ function ProductPreview({linkToModel}){
 
 }
 
+function Model({linkToModel}) {
+  const result = useLoader(GLTFLoader, linkToModel)
+  result.scene.scale.set(0.01,0.01,0.01);
+  // You don't need to check for the presence of the result, when we're here
+  // the result is guaranteed to be present since useLoader suspends the component
+  return <primitive object={result.scene}  />
+}
+
 function ProductImages({images, model}){
     return(
-        <aside className="col-lg-6">
-        <div className="border rounded-4 mb-3 d-flex justify-content-center" style={{height: "500px"}}>
-          {/* <a
-            data-fslightbox="mygalley"
-            className="rounded-4"
-            target="_blank"
-            data-type="image"
-            href="#"
-          >
-            <img
-              style={{ maxWidth: "100%", maxHeight: "50vh", margin: "auto" }}
-              className="rounded-4 fit"
-              src={images[0]}
+        <aside className="col-lg-6" >
+        <div
+          id="carouselExampleIndicators"
+          className="carousel slide"
+          data-bs-ride="carousel"
+        >
+          <div className="carousel-indicators">
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to={0}
+              className="active"
+              aria-current="true"
+              aria-label="Slide 1"
             />
-          </a> */}
-          <ProductPreview linkToModel={model}/>
+            <button
+              type="button"
+              data-bs-target="#carouselExampleIndicators"
+              data-bs-slide-to={1}
+              aria-label="Slide 2"
+            />
+          </div>
+          <div className="carousel-inner" style={{borderRadius:"20px"}}>
+            <div className="carousel-item active">
+              <ProductPreview linkToModel={model} />
+            </div>
+            <div className="carousel-item">
+              <img src={images[0]} className="d-block w-100" alt="..." style={{maxHeight:"50vh"}} />
+            </div>
+          </div>
+          <button
+            className="carousel-control-prev"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev"
+          >
+            <span className="carousel-control-prev-icon" aria-hidden="true" />
+            <span className="visually-hidden">Previous</span>
+          </button>
+          <button
+            className="carousel-control-next"
+            type="button"
+            data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next"
+          >
+            <span className="carousel-control-next-icon" aria-hidden="true" />
+            <span className="visually-hidden">Next</span>
+          </button>
         </div>
-        {/* <div className="d-flex justify-content-center mb-3">
-          <a
-            data-fslightbox="mygalley"
-            className="border mx-1 rounded-2"
-            target="_blank"
-            data-type="image"
-            href="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big1.webp"
-          >
-            <img
-              width={60}
-              height={60}
-              className="rounded-2"
-              src="https://mdbcdn.b-cdn.net/img/bootstrap-ecommerce/items/detail1/big1.webp"
-            />
-          </a>
 
-        </div> */}
       </aside>
     )
 }
@@ -119,8 +142,8 @@ function ProductBasicInfo({product}){
             <dd className="col-9">{product.brand}</dd>
           </div>
           <hr />
-          <ProductVariant />
-          <ProductActions />
+          {/* <ProductVariant /> */}
+          {/* <ProductActions /> */}
         </div>
       </main>
     )
